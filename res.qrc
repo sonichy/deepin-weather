@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icon/atmosphere.svg</file>
+        <file>icon/clear.svg</file>
+        <file>icon/clouds.svg</file>
+        <file>icon/drizzle.svg</file>
+        <file>icon/rain.svg</file>
+        <file>icon/snow.svg</file>
+        <file>icon/thunderstorm.svg</file>
+    </qresource>
+</RCC>

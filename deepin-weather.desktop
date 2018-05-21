@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=deepin-weather
+Comment=
+Exec=/media/sonichy/job/HY/Linux/Qt/DTK/deepin-weather/deepin-weather
+Icon=/media/sonichy/job/HY/Linux/Qt/DTK/deepin-weather/icon/clear.svg
+Path=/media/sonichy/job/HY/Linux/Qt/DTK/deepin-weather
+Terminal=false
+Type=Application
+MimeType=
+Categories=
