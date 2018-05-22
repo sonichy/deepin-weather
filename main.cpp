@@ -9,10 +9,8 @@ int main(int argc, char *argv[])
     DApplication::loadDXcbPlugin();
     DApplication a(argc, argv);
     qSetMessagePattern("[ %{file}: %{line} ] %{message}");
-    MainWindow w;
-    w.resize(220,330);
+    MainWindow w;    
     w.show();
-    //w.move(0,100);
-    moveToCenter(&w);
+    //moveToCenter(&w);
     return a.exec();
 }

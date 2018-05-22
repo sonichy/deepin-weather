@@ -13,16 +13,28 @@
 #include <QIcon>
 #include <QAction>
 #include <QApplication>
+#include <QSettings>
+#include <QDir>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent)
     : DBlurEffectWidget(parent)
 {
     isMLBD = false;
     city = latitude = longitude = "";
+    resize(220,330);
     setWindowIcon(QIcon(":icon/clear.svg"));
     setWindowFlags(Qt::FramelessWindowHint);
     setMaskColor(DarkColor);
     //setBlendMode(InWindowBlend);
+
+    QString x = readSettings(QDir::currentPath() + "/config.ini", "config", "X");
+    QString y = readSettings(QDir::currentPath() + "/config.ini", "config", "Y");
+    if(x=="" || y=="" || x.toInt()>QApplication::desktop()->width() || y.toInt()>QApplication::desktop()->height()){
+        move((QApplication::desktop()->width()-width())/2, (QApplication::desktop()->height()-height())/2);
+    }else{
+        move(x.toInt(),y.toInt());
+    }
 
     layout = new QGridLayout;
     for(int i=0; i<6; i++){
@@ -86,6 +98,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
     Q_UNUSED(event);
     isMLBD = false;
     setCursor(Qt::ArrowCursor);
+    writeSettings(QDir::currentPath() + "/config.ini", "config", "X", QString::number(x()));
+    writeSettings(QDir::currentPath() + "/config.ini", "config", "Y", QString::number(y()));
 }
 
 void MainWindow::getWeather()
@@ -165,4 +179,21 @@ void MainWindow::getWeather()
             }
         }
     }
+}
+
+QString MainWindow::readSettings(QString path, QString group, QString key)
+{
+    QSettings settings(path, QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
+    settings.beginGroup(group);
+    QString value = settings.value(key).toString();
+    return value;
+}
+
+void MainWindow::writeSettings(QString path, QString group, QString key, QString value)
+{
+    QSettings *config = new QSettings(path, QSettings::IniFormat);
+    config->beginGroup(group);
+    config->setValue(key, value);
+    config->endGroup();
 }

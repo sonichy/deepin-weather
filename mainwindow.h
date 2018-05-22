@@ -26,6 +26,8 @@ private:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    QString readSettings(QString path, QString group, QString key);
+    void writeSettings(QString path, QString group, QString key, QString value);
 
 private slots:
     void getWeather();
